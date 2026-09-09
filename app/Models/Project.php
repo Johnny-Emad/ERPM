@@ -10,6 +10,8 @@ class Project extends Model
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
 
+    protected $fillable = ["title", "description", "start_date", "end_date", "status"];
+
     public function skills()
     {
         return $this->belongsToMany(Skill::class);
