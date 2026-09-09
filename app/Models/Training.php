@@ -10,6 +10,8 @@ class Training extends Model
     /** @use HasFactory<\Database\Factories\TrainingFactory> */
     use HasFactory;
 
+    protected $fillable = ['title', 'provider'];
+
     public function employees()
     {
         return $this->belongsToMany(Employee::class);
