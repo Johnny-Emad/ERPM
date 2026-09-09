@@ -9,4 +9,9 @@ class Skill extends Model
 {
     /** @use HasFactory<\Database\Factories\SkillFactory> */
     use HasFactory;
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }
