@@ -20,7 +20,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string("title");
             $table->text("description")->nullable();
-            $table->enum("priority", ["High,Medium,Low"]);
+            $table->enum("priority", ["High", "Medium", "Low"]);
             $table->enum("status", ["Pending", "In Progress", "Completed"]);
             $table->date("due_date");
             $table->timestamps();
