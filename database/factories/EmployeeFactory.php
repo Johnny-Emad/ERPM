@@ -18,7 +18,10 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'job_title' => fake()->jobTitle(),
+            'salary' => fake()->randomFloat(2, 3000, 15000),
+            'hire_date' => fake()->date(),
         ];
     }
 }
