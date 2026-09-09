@@ -18,8 +18,15 @@ class DepartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->department(),
-            'code' => strtoupper(fake()->unique()->lexify('DEP-???')),
+            'name' => fake()->randomElement([
+                'IT',
+                'HR',
+                'Finance',
+                'Marketing',
+                'Sales',
+                'Operations',
+            ]),
+            'code' => fake()->unique()->lexify('DEP-???'),
             'description' => fake()->sentence(),
         ];
     }
