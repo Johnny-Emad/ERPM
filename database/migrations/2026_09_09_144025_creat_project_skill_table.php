@@ -11,7 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId("project_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("skill")->constrained()->cascadeOnDelete();
+            $table->timestamps();
+        });
     }
 
     /**
