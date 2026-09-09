@@ -10,6 +10,8 @@ class Employee extends Model
     /** @use HasFactory<\Database\Factories\EmployeeFactory> */
     use HasFactory;
 
+    protected $fillable = ["department_id", "name", "job_title", "salary", "hire_date"];
+
     public function department()
     {
         return $this->belongsTo(Department::class);
