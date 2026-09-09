@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId("department_id")->constrained()->cascadeOnDelete();
             $table->string("name");
             $table->string("job_title");
-            $table->decimal("salary");
-            $table->date("salary");
+            $table->decimal("salary", 8, 2);
+            $table->hire_date("salary");
             $table->timestamps();
         });
     }
