@@ -18,13 +18,11 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'bio' => fake()->paragraph(),
-            'phone' => fake()->phoneNumber(),
-            'avatar' => fake()->imageUrl(200, 200, 'people'),
-            'social_links' => json_encode([
-                'github' => 'https://github.com/' . fake()->userName(),
-                'linkedin' => 'https://linkedin.com/in/' . fake()->userName(),
-            ]),
+            'title' => fake()->catchPhrase(),
+            'description' => fake()->paragraph(),
+            'start_date' => fake()->date(),
+            'end_date' => fake()->dateTimeBetween('+1 month', '+1 year')->format('Y-m-d'),
+            'status' => fake()->randomElement(['Pending', 'Active', 'Completed']),
         ];
     }
 }
