@@ -18,7 +18,8 @@ class TrainingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->sentence(3),
+            'provider' => fake()->company(),
         ];
     }
 }
