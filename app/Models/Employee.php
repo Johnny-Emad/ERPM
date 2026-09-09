@@ -17,6 +17,6 @@ class Employee extends Model
 
     public function trainings()
     {
-        return $this->belongsToMany(Training::class)
+        return $this->belongsToMany(Training::class);
     }
 }
