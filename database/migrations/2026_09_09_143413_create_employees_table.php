@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("job_title");
             $table->decimal("salary", 8, 2);
-            $table->hire_date("salary");
+            $table->date("hire_date");
             $table->timestamps();
         });
     }
