@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
                     <div>
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">الأقسام (Departments)</h3>
                         <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">إدارة الهيكل التنظيمي للأقسام والموظفين التابعين لها.</p>
@@ -60,7 +60,7 @@
                             الانتقال للأقسام &rarr;
                         </a>
                     </div>
-                </div> --}}
+                </div> 
 
                 {{-- Employees Card --}}
                 {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
