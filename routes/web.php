@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
@@ -24,5 +25,6 @@ Route::middleware('auth')->group(function () {
 Route::resource("projects", ProjectController::class);
 Route::resource("tasks", TaskController::class);
 Route::resource("departments", DepartmentController::class);
+Route::resource("employees", EmployeeController::class);
 
 require __DIR__ . '/auth.php';
