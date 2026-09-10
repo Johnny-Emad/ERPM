@@ -29,7 +29,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title'       => 'required|string|max:255',
+            'description' => 'required|string',
+            'start_date'  => 'required|date',
+            'end_date'    => 'required|date|after_or_equal:start_date',
+            'status'      => 'required|in:Pending,Active,Completed',
+            'skills'      => 'nullable|array',
+            'skills.*'    => 'exists:skills,id',
+        ]);
+
+        Project::create($validated);
+        return redirect()->route('projects.index')
+            ->with('success', 'Project created successfully.');
     }
 
     /**
