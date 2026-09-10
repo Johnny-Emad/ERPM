@@ -1,21 +1,16 @@
 <x-app-layout>
 
-
-
     <x-slot name="header">
-
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Edit Project') }}
         </h2>
     </x-slot>
 
-
-
-    <div>
+    <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
 
-                <form method="POST" action="{{ route('projects.update', $project->id) }}" class="space-y-6">
+                <form method="POST" action="{{ route('projects.update', $project) }}" class="space-y-6">
                     @csrf
                     @method('PUT')
 
@@ -44,10 +39,35 @@
                         <div>
                             <x-input-label for="end_date" :value="__('End Date')" />
                             <x-text-input id="end_date" class="block mt-1 w-full" type="date" name="end_date" :value="old('end_date', $project->end_date)" />
-                            <x-input-error :messages="$errors->get('end
+                            <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
+                        </div>
+                    </div>
+
+                    {{-- Status --}}
+                    <div>
+                        <x-input-label for="status" :value="__('Status')" />
+                        <select id="status" name="status" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            <option value="">{{ __('Select Status') }}</option>
+                            <option value="Not Started" {{ old('status', $project->status) == 'Not Started' ? 'selected' : '' }}>Not Started</option>
+                            <option value="In Progress" {{ old('status', $project->status) == 'In Progress' ? 'selected' : '' }}>In Progress</option>
+                            <option value="Completed" {{ old('status', $project->status) == 'Completed' ? 'selected' : '' }}>Completed</option>
+                        </select>
+                        <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                    </div>
+
+                    {{-- Actions --}}
+                    <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <a href="{{ route('projects.index') }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 underline">
+                            {{ __('Cancel') }}
+                        </a>
+                        <x-primary-button>
+                            {{ __('Update Project') }}
+                        </x-primary-button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>
 
-
-
 </x-app-layout>
-
