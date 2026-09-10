@@ -12,7 +12,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::latest()->paginate(10);
         return view("projects.index", ["projects" => $projects]);
     }
 
