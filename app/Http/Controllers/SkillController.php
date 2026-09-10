@@ -12,7 +12,9 @@ class SkillController extends Controller
      */
     public function index()
     {
-        //
+        $skills = Skill::withCount('projects')->latest()->paginate(10);
+
+        return view('skills.index', ['skills' => $skills]);
     }
 
     /**
@@ -20,7 +22,7 @@ class SkillController extends Controller
      */
     public function create()
     {
-        //
+        return view('skills.create');
     }
 
     /**
@@ -28,7 +30,16 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name'        => 'required|string|max:255|unique:skills,name',
+            'category'    => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        Skill::create($validated);
+
+        return redirect()->route('skills.index')
+            ->with('success', 'Skill created successfully.');
     }
 
     /**
@@ -36,7 +47,9 @@ class SkillController extends Controller
      */
     public function show(Skill $skill)
     {
-        //
+        $skill->load('projects');
+
+        return view('skills.show', ['skill' => $skill]);
     }
 
     /**
@@ -44,7 +57,7 @@ class SkillController extends Controller
      */
     public function edit(Skill $skill)
     {
-        //
+        return view('skills.edit', ['skill' => $skill]);;
     }
 
     /**
@@ -52,7 +65,16 @@ class SkillController extends Controller
      */
     public function update(Request $request, Skill $skill)
     {
-        //
+        $validated = $request->validate([
+            'name'        => 'required|string|max:255|unique:skills,name,' . $skill->id,
+            'category'    => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $skill->update($validated);
+
+        return redirect()->route('skills.index')
+            ->with('success', 'Skill updated successfully.');
     }
 
     /**
@@ -60,6 +82,9 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        //
+        $skill->delete();
+
+        return redirect()->route('skills.index')
+            ->with('success', 'Skill deleted successfully.');
     }
 }
