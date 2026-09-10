@@ -50,14 +50,15 @@
                     </div>
                 </div>
 
+                {{-- Departments Card --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">الأقسام (Departments)</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">إدارة الهيكل التنظيمي للأقسام والموظفين التابعين لها.</p>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Departments</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Manage organizational structure and department employees.</p>
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('departments.index') }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
-                            الانتقال للأقسام &rarr;
+                            Go to Departments &rarr;
                         </a>
                     </div>
                 </div> 
@@ -65,38 +66,38 @@
                 {{-- Employees Card --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">الموظفون (Employees)</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">سجلات الموظفين، الرواتب، وتاريخ التعيين.</p>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Employees</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Manage employee records, salaries, and hire dates.</p>
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('employees.index') }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
-                            الانتقال للموظفين &rarr;
+                            Go to Employees &rarr;
                         </a>
                     </div>
                 </div>
 
                 {{-- Skills Card --}}
-                {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">المهارات (Skills)</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">قائمة المهارات المتاحة وتصنيفاتها لربطها بالمشاريع.</p>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Skills</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">List of available skills and their categories for project binding.</p>
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('skills.index') }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
-                            الانتقال للمهارات &rarr;
+                            Go to Skills &rarr;
                         </a>
                     </div>
-                </div>--}}
+                </div>
                 
                 {{-- Trainings Card --}}
                 {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">التدريبات (Trainings)</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">البرامج التدريبية وتتبع إتمام الموظفين لها.</p>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Trainings</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Training programs and employee completion tracking.</p>
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('trainings.index') }}" class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
-                            الانتقال للتدرّيبات &rarr;
+                            Go to Trainings &rarr;
                         </a>
                     </div>
                 </div> --}}
