@@ -15,56 +15,67 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4">
+            
+            {{-- Flash Success Message --}}
+            @if (session('success'))
+                <div class="p-4 text-sm text-emerald-800 rounded-lg bg-emerald-50 dark:bg-gray-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 
-                {{-- Table without horizontal scrolling --}}
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-fixed">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-4 py-3 w-1/4">Title</th>
-                            <th scope="col" class="px-4 py-3 w-1/4 hidden md:table-cell">Description</th>
-                            <th scope="col" class="px-4 py-3 w-1/6 hidden sm:table-cell">Start Date</th>
-                            <th scope="col" class="px-4 py-3 w-1/6 hidden lg:table-cell">End Date</th>
-                            <th scope="col" class="px-4 py-3 w-1/6">Status</th>
+                            <th scope="col" class="px-4 py-3 w-1/5">Title</th>
+                            <th scope="col" class="px-4 py-3 w-1/6 hidden md:table-cell">Project</th>
+                            <th scope="col" class="px-4 py-3 w-1/6 hidden sm:table-cell">Assigned To</th>
+                            <th scope="col" class="px-4 py-3 w-1/6 hidden lg:table-cell">Due Date</th>
+                            <th scope="col" class="px-4 py-3 w-1/6">Priority / Status</th>
                             <th scope="col" class="px-4 py-3 w-auto text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($tasks as $task)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition duration-150">
+                                
                                 {{-- Title --}}
                                 <td class="px-4 py-4 font-medium text-gray-900 dark:text-white truncate">
                                     {{ $task->title }}
                                 </td>
 
-                                {{-- Description --}}
-                                <td class="px-4 py-4 truncate hidden md:table-cell">
-                                    {{ $task->description }}
+                                {{-- Project Name --}}
+                                <td class="px-4 py-4 truncate hidden md:table-cell text-gray-700 dark:text-gray-300">
+                                    {{ $task->project->title ?? 'N/A' }}
                                 </td>
 
-                                {{-- Start Date --}}
-                                <td class="px-4 py-4 whitespace-nowrap hidden sm:table-cell">
-                                    {{ $task->start_date }}
+                                {{-- Team Member (Assigned User) --}}
+                                <td class="px-4 py-4 whitespace-nowrap hidden sm:table-cell font-medium text-gray-800 dark:text-gray-200">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-6 h-6 rounded-full bg-indigo-500 text-white flex items-center justify-center text-xs uppercase font-bold">
+                                            {{ substr($task->assignedUser->name ?? 'U', 0, 1) }}
+                                        </div>
+                                        <span>{{ $task->assignedUser->name ?? 'Unassigned' }}</span>
+                                    </div>
                                 </td>
 
-                                {{-- End Date --}}
+                                {{-- Due Date --}}
                                 <td class="px-4 py-4 whitespace-nowrap hidden lg:table-cell">
-                                    {{ $task->end_date ?? '-' }}
+                                    {{ $task->due_date ?? '-' }}
                                 </td>
 
-                                {{-- Status Badge --}}
-                                <td class="px-4 py-4 whitespace-nowrap">
+                                {{-- Status & Priority Badges --}}
+                                <td class="px-4 py-4 whitespace-nowrap space-y-1">
                                     @php
                                         $statusClasses = match(strtolower($task->status)) {
-                                            'completed', 'active' => 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800',
-                                            'in progress', 'pending' => 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-400 border border-amber-200 dark:border-amber-800',
-                                            'not started', 'cancelled' => 'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-400 border border-rose-200 dark:border-rose-800',
-                                            default => 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600',
+                                            'completed' => 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-400 border-emerald-200',
+                                            'in progress' => 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-400 border-amber-200',
+                                            default => 'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-400 border-rose-200',
                                         };
                                     @endphp
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold shadow-sm {{ $statusClasses }}">
-                                        <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold border {{ $statusClasses }}">
                                         {{ $task->status }}
                                     </span>
                                 </td>
@@ -93,6 +104,12 @@
                 </table>
 
             </div>
+
+            {{-- Tailwind Pagination Links --}}
+            <div class="mt-4">
+                {{ $tasks->links() }}
+            </div>
+
         </div>
     </div>
 

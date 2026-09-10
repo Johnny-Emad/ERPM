@@ -12,8 +12,11 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::withCount('teamMembers')->latest()->paginate(10);
-        return view('tasks.index', ['tasks' => $tasks]);
+        $tasks = Task::with(['project', 'assignedUser'])
+            ->latest()
+            ->paginate(10);
+
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
