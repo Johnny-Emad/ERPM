@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -12,7 +13,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employee::with('department')->latest()->paginate(10);
+
+        return view('employees.index', ['employees' => $employees]);
     }
 
     /**
@@ -20,7 +23,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::all();
+
+        return view('employees.create', ['departments' => $departments]);
     }
 
     /**
@@ -28,7 +33,18 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name'          => 'required|string|max:255',
+            'email'         => 'nullable|email|unique:employees,email',
+            'job_title'     => 'required|string|max:255',
+            'department_id' => 'required|exists:departments,id',
+            'hire_date'     => 'nullable|date',
+        ]);
+
+        Employee::create($validated);
+
+        return redirect()->route('employees.index')
+            ->with('success', 'Employee created successfully.');
     }
 
     /**
@@ -36,7 +52,9 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        $employee->load('department');
+
+        return view('employees.show', ['employee' => $employee]);
     }
 
     /**
@@ -44,7 +62,9 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        $departments = Department::all();
+
+        return view('employees.edit', ['employee' => $employee, 'departments' => $departments]);
     }
 
     /**
@@ -52,7 +72,18 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $validated = $request->validate([
+            'name'          => 'required|string|max:255',
+            'email'         => 'nullable|email|unique:employees,email,' . $employee->id,
+            'job_title'     => 'required|string|max:255',
+            'department_id' => 'required|exists:departments,id',
+            'hire_date'     => 'nullable|date',
+        ]);
+
+        $employee->update($validated);
+
+        return redirect()->route('employees.index')
+            ->with('success', 'Employee updated successfully.');
     }
 
     /**
@@ -60,6 +91,9 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+
+        return redirect()->route('employees.index')
+            ->with('success', 'Employee deleted successfully.');
     }
 }
