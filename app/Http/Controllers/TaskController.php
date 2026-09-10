@@ -29,7 +29,15 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'due_date' => 'nullable|date',
+        ]);
+
+        Task::create($validated);
+
+        return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
 
     /**
@@ -37,16 +45,13 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        return view('tasks.show', ['task' => $task]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
-    {
-        //
-    }
+    public function edit(Task $task) {}
 
     /**
      * Update the specified resource in storage.
