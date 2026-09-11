@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TrainingController;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,6 @@ Route::resource("tasks", TaskController::class);
 Route::resource("departments", DepartmentController::class);
 Route::resource("employees", EmployeeController::class);
 Route::resource("skills", SkillController::class);
+Route::resource("trainings", TrainingController::class);
 
 require __DIR__ . '/auth.php';
