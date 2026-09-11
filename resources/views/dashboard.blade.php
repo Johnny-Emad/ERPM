@@ -90,7 +90,7 @@
                 </div>
                 
                 {{-- Trainings Card --}}
-                {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 flex flex-col justify-between">
                     <div>
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Trainings</h3>
                         <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Training programs and employee completion tracking.</p>
@@ -100,7 +100,7 @@
                             Go to Trainings &rarr;
                         </a>
                     </div>
-                </div> --}}
+                </div>
 
             </div>
 
