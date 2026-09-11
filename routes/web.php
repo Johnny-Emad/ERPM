@@ -28,5 +28,6 @@ Route::resource("projects", ProjectController::class);
 Route::resource("tasks", TaskController::class);
 Route::resource("departments", DepartmentController::class);
 Route::resource("employees", EmployeeController::class);
+Route::resource("skills", SkillController::class);
 
 require __DIR__ . '/auth.php';
